@@ -1,0 +1,33 @@
+ {% load staticfiles %}
+
+<h1>New post</h1>
+<form method="POST" class="post-form">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save</button>
+</form>
+
+{% if messages %}
+
+<h1> Chat Messages </h1>
+<ul>
+  {% for message in messages %}
+  <li>
+    <table>
+      <tr>
+        <th> {{message.author_ip}} </th>
+        <th> {{message.timestamp}} </th>
+      </tr>
+      <tr>
+        <td colspan="2"> {{ message.content}} </td>
+      </tr>
+    </table>
+  </li>
+  {% endfor %}
+</ul>
+
+{% else %}
+
+<h3> ¡CHAT VACIO! </h3>
+
+{% endif %}
